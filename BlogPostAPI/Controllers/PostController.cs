@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BlogPostAPI.Data;
+using BlogPostAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPostAPI.Controllers
@@ -17,9 +18,9 @@ namespace BlogPostAPI.Controllers
 
         // GET: api/Post
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Post> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _postDbContext.Posts;
         }
 
         // GET: api/Post/5
