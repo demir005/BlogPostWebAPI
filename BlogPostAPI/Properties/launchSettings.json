@@ -11,11 +11,11 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "launchBrowser": true,
+      "launchUrl": "api/Post"
     },
     "BlogPostAPI": {
       "commandName": "Project",
