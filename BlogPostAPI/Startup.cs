@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogPostAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,10 +28,12 @@ namespace BlogPostAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<PostDbContext>(option => option.UseSqlServer(@"Data Source = (LocalDb)\MSSQLLocalDB; Initial Catalog=BlogPostDb;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PostDbContext postDbContext)
         {
             if (env.IsDevelopment())
             {
@@ -41,6 +45,8 @@ namespace BlogPostAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            postDbContext.Database.EnsureCreated();
 
             app.UseEndpoints(endpoints =>
             {

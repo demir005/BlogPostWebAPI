@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BlogPostAPI.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPostAPI.Controllers
@@ -7,6 +8,13 @@ namespace BlogPostAPI.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
+        private readonly PostDbContext _postDbContext;
+
+        public PostController(PostDbContext postDbContext)
+        {
+            _postDbContext = postDbContext;
+        }
+
         // GET: api/Post
         [HttpGet]
         public IEnumerable<string> Get()
